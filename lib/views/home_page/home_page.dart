@@ -1,5 +1,6 @@
+import 'package:dd_flickr_test/base/app_constants.dart';
+import 'package:dd_flickr_test/base/app_methods.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -36,12 +37,12 @@ class _HomePageState extends State<HomePage> {
         ),
         appBar: AppBar(
           title: const Text(
-            'Flickr Test',
+            'Do Digital Test',
           ),
           leading: Padding(
             padding: const EdgeInsets.only(left: 20),
             child: IconButton(
-              icon: Icon(Icons.menu),
+              icon: const Icon(Icons.menu),
               onPressed: () {
                 _scaffoldKey.currentState?.openDrawer();
               },
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                 height: 25,
                 child: GestureDetector(
                   onTap: () {
-                    _launchURL();
+                    AppMethods().launchURL(AppConstants.doDigitalLink);
                   },
                   child: Image.asset(
                     'assets/dd_logo.png',
@@ -67,12 +68,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  _launchURL() async {
-    const _url = 'https://www.dodigital.ru/';
-    if (await canLaunchUrl(Uri.parse(_url))) {
-      await launchUrl(Uri.parse(_url));
-    }
   }
 }

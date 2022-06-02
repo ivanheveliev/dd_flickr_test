@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flickr Test',
+      title: 'Do Digital Test',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           centerTitle: false,
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
