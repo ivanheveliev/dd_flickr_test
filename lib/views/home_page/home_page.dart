@@ -3,8 +3,10 @@ import 'package:dd_flickr_test/base/app_methods.dart';
 import 'package:dd_flickr_test/data/models/unsplash_model.dart';
 import 'package:dd_flickr_test/data/requests/requests_repo.dart';
 import 'package:dd_flickr_test/icons/emotions_icons.dart';
+import 'package:dd_flickr_test/views/fullscreen_page.dart/fullscreen_photo_page.dart';
 import 'package:dd_flickr_test/views/home_page/home_page_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:intl/intl.dart';
@@ -102,7 +104,8 @@ class _HomePageState extends State<HomePage> {
               child: SizedBox(
                 height: MediaQuery.of(context).size.height -
                     80 -
-                    MediaQuery.of(context).padding.top,
+                    MediaQuery.of(context).padding.top -
+                    MediaQuery.of(context).padding.bottom,
                 width: MediaQuery.of(context).size.width,
                 child: PagewiseListView(
                   pageSize: 10,
@@ -130,12 +133,27 @@ class _HomePageState extends State<HomePage> {
 
   Widget _itemBuilder(context, UnsplashResults a, index) {
     int _index = index + 1;
-    bool? _isLiked = AppBaseMethods().getInfoAboutLikesFromSP(_index);
+    bool _isLiked = AppBaseMethods().getInfoAboutLikesFromSP(_index) ?? false;
     return Padding(
       padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
       child: InkWell(
-        onTap: () {
-          print(_index);
+        onTap: () async {
+          await Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, _, __) => FullScreenPhotoPage(
+                index: _index,
+                child: Image.network(
+                  a.urls!.full!,
+                ),
+                isLiked: _isLiked,
+              ),
+            ),
+          );
+          setState(() {
+            _isLiked =
+                AppBaseMethods().getInfoAboutLikesFromSP(_index) ?? false;
+          });
         },
         child: Card(
           color: const Color.fromRGBO(250, 250, 240, 1),
@@ -255,18 +273,15 @@ class _HomePageState extends State<HomePage> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                AppBaseMethods().setInfoAboutLikeInSP(
-                                    _isLiked != null ? !_isLiked : true,
-                                    _index);
+                                AppBaseMethods()
+                                    .setInfoAboutLikeInSP(!_isLiked, _index);
                               });
                             },
-                            child: _isLiked != null
-                                ? _isLiked
-                                    ? const Icon(
-                                        Emotions.like,
-                                        color: Color.fromRGBO(184, 7, 29, 1),
-                                      )
-                                    : const Icon(Emotions.heart)
+                            child: _isLiked
+                                ? const Icon(
+                                    Emotions.like,
+                                    color: Color.fromRGBO(184, 7, 29, 1),
+                                  )
                                 : const Icon(Emotions.heart),
                           ),
                         ),
