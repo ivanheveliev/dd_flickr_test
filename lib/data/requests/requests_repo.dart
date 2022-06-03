@@ -4,11 +4,11 @@ import 'package:dd_flickr_test/data/models/unsplash_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class Request {
-  Future<List<UnsplashResults>> fetchData(
-      int offset, int limit, int index) async {
+class RequestsRepo {
+  Future<List<UnsplashResults>> getPhotoCollectionList(
+      int page, int perPage) async {
     List<UnsplashResults> _listMap = [];
-    String url = AppConstants.unsplashApiLink + 'page=$limit&per_page=$index';
+    String url = AppConstants.unsplashApiLink + 'page=$page&per_page=$perPage';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

@@ -1,8 +1,10 @@
+import 'package:dd_flickr_test/base/app_methods.dart';
 import 'package:dd_flickr_test/views/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await AppBaseMethods().getPreferences();
   runApp(
     const MyApp(),
   );
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

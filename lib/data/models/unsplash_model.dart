@@ -11,17 +11,17 @@ class UnsplashModel {
     if (json['results'] != null) {
       results = <UnsplashResults>[];
       json['results'].forEach((v) {
-        results!.add(new UnsplashResults.fromJson(v));
+        results!.add(UnsplashResults.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['total'] = this.total;
-    data['total_pages'] = this.totalPages;
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['total_pages'] = totalPages;
+    if (results != null) {
+      data['results'] = results!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -43,19 +43,19 @@ class UnsplashResults {
   UnsplashResults.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     createdAt = json['created_at'];
-    urls = json['urls'] != null ? new Urls.fromJson(json['urls']) : null;
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    urls = json['urls'] != null ? Urls.fromJson(json['urls']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['created_at'] = this.createdAt;
-    if (this.urls != null) {
-      data['urls'] = this.urls!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['created_at'] = createdAt;
+    if (urls != null) {
+      data['urls'] = urls!.toJson();
     }
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
@@ -87,13 +87,13 @@ class Urls {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['raw'] = this.raw;
-    data['full'] = this.full;
-    data['regular'] = this.regular;
-    data['small'] = this.small;
-    data['thumb'] = this.thumb;
-    data['small_s3'] = this.smallS3;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['raw'] = raw;
+    data['full'] = full;
+    data['regular'] = regular;
+    data['small'] = small;
+    data['thumb'] = thumb;
+    data['small_s3'] = smallS3;
     return data;
   }
 }
@@ -121,19 +121,19 @@ class User {
     firstName = json['first_name'];
     lastName = json['last_name'];
     profileImage = json['profile_image'] != null
-        ? new ProfileImage.fromJson(json['profile_image'])
+        ? ProfileImage.fromJson(json['profile_image'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['username'] = this.username;
-    data['name'] = this.name;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    if (this.profileImage != null) {
-      data['profile_image'] = this.profileImage!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['username'] = username;
+    data['name'] = name;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    if (profileImage != null) {
+      data['profile_image'] = profileImage!.toJson();
     }
     return data;
   }
@@ -153,10 +153,10 @@ class ProfileImage {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['small'] = this.small;
-    data['medium'] = this.medium;
-    data['large'] = this.large;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['small'] = small;
+    data['medium'] = medium;
+    data['large'] = large;
     return data;
   }
 }
