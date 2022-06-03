@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             if (state is InitState) {
             } else if (state is ErrorState) {
             } else if (state is LoadingState) {
-            } else if (state is GotThePhotoCollectionListState) {}
+            } else if (state is LoadedState) {}
           },
           builder: (BuildContext context, HomePageState state) {
             return _getBodyContainer();
@@ -272,6 +272,12 @@ class _HomePageState extends State<HomePage> {
                               .withOpacity(0.1),
                           child: InkWell(
                             onTap: () {
+                              if (_isLiked) {
+                                _homePageBloc
+                                    .sendAnalyticsRemovedLikePhoto(index);
+                              } else {
+                                _homePageBloc.sendAnalyticsLikePhoto(_index);
+                              }
                               setState(() {
                                 AppBaseMethods()
                                     .setInfoAboutLikeInSP(!_isLiked, _index);
@@ -295,19 +301,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  Widget _getIconWidget(int index) {
-    bool? isLike = AppBaseMethods().getInfoAboutLikesFromSP(index);
-    try {
-      if (isLike!) {
-        return const Icon(Emotions.heart);
-      } else {
-        return const Icon(Emotions.like);
-      }
-    } catch (e) {
-      return const Icon(Emotions.heart);
-    }
   }
 
   Widget _showLoader(BuildContext context) {

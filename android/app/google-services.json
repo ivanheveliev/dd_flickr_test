@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "206406230322",
+    "project_id": "dd-fliclkr-test",
+    "storage_bucket": "dd-fliclkr-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206406230322:android:356bf3fc006cb7f88d772b",
+        "android_client_info": {
+          "package_name": "com.example.dd_flickr_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206406230322-gnmi0dk72hrta40bastgpa0verh2i967.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dd_flickr_test",
+            "certificate_hash": "3206cacc3816865e32e440ad7495b55923c9ca42"
+          }
+        },
+        {
+          "client_id": "206406230322-5tsv26qs5g25hikbof8dcvgjn1rbsc26.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBV8TYfVb0JXPthrZ9sQoPB87pzi8kvDvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206406230322-5tsv26qs5g25hikbof8dcvgjn1rbsc26.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
