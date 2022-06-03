@@ -1,3 +1,7 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -52,13 +56,10 @@ android {
 
     buildTypes {
         release {
-        
+            minifyEnabled true   
+            shrinkResources true   
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'   
             signingConfig signingConfigs.debug
-
-            minifyEnabled true
-            useProguard true
-
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' 
         }
     }
 }
@@ -66,9 +67,6 @@ android {
 flutter {
     source '../..'
 }
-
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
