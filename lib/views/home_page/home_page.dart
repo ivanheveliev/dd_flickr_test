@@ -2,7 +2,8 @@ import 'package:dd_flickr_test/base/app_constants.dart';
 import 'package:dd_flickr_test/base/app_methods.dart';
 import 'package:dd_flickr_test/data/models/unsplash_model.dart';
 import 'package:dd_flickr_test/data/requests/requests_repo.dart';
-import 'package:dd_flickr_test/icons/emotions_icons.dart';
+import 'package:dd_flickr_test/icons/custom_icons_icons.dart';
+import 'package:dd_flickr_test/views/drawer_screen/drawer_screen.dart';
 import 'package:dd_flickr_test/views/fullscreen_page.dart/fullscreen_photo_page.dart';
 import 'package:dd_flickr_test/views/home_page/home_page_bloc.dart';
 import 'package:flutter/material.dart';
@@ -40,14 +41,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: const Drawer(
-          child: Center(
-            child: Text(
-              'Wait for the next app update...',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        ),
+        drawer: const DrawerScreen(),
         appBar: AppBar(
           title: const Text(
             'Do Digital Test',
@@ -69,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 height: 25,
                 child: GestureDetector(
                   onTap: () {
-                    AppBaseMethods().launchURL(AppConstants.doDigitalLink);
+                    AppMethods().launchURL(AppConstants.doDigitalLink);
                   },
                   child: Image.asset(
                     'assets/dd_logo.png',
@@ -133,7 +127,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _itemBuilder(context, UnsplashResults a, index) {
     int _index = index + 1;
-    bool _isLiked = AppBaseMethods().getInfoAboutLikesFromSP(_index) ?? false;
+    bool _isLiked = AppMethods().getInfoAboutLikesFromSP(_index) ?? false;
     return Padding(
       padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
       child: InkWell(
@@ -151,8 +145,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
           setState(() {
-            _isLiked =
-                AppBaseMethods().getInfoAboutLikesFromSP(_index) ?? false;
+            _isLiked = AppMethods().getInfoAboutLikesFromSP(_index) ?? false;
           });
         },
         child: Card(
@@ -182,19 +175,12 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(45),
-                              child: SizedBox(
-                                width: 64,
-                                height: 64,
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 32,
-                                  backgroundImage: Image.network(
-                                    a.user!.profileImage!.medium!,
-                                  ).image,
-                                ),
-                              ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 32,
+                              backgroundImage: Image.network(
+                                a.user!.profileImage!.medium!,
+                              ).image,
                             ),
                           ),
                         ),
@@ -279,16 +265,16 @@ class _HomePageState extends State<HomePage> {
                                 _homePageBloc.sendAnalyticsLikePhoto(_index);
                               }
                               setState(() {
-                                AppBaseMethods()
+                                AppMethods()
                                     .setInfoAboutLikeInSP(!_isLiked, _index);
                               });
                             },
                             child: _isLiked
                                 ? const Icon(
-                                    Emotions.like,
+                                    CustomIcons.like,
                                     color: Color.fromRGBO(184, 7, 29, 1),
                                   )
-                                : const Icon(Emotions.heart),
+                                : const Icon(CustomIcons.heart),
                           ),
                         ),
                       ),

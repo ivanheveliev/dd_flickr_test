@@ -20,6 +20,7 @@ dependencies:
   shared_preferences: ^2.0.15
   firebase_analytics: ^9.1.9
   firebase_core: ^1.17.1
+  package_info_plus: ^1.4.2
 
 dev_dependencies:
   flutter_test:
@@ -32,9 +33,9 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: Emotions
+    - family: CustomIcons
       fonts:
-        - asset: fonts/Emotions.ttf
+        - asset: fonts/CustomIcons.ttf
 
   assets:
     - assets/

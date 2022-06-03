@@ -1,5 +1,5 @@
 import 'package:dd_flickr_test/base/app_methods.dart';
-import 'package:dd_flickr_test/icons/emotions_icons.dart';
+import 'package:dd_flickr_test/icons/custom_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -38,8 +38,7 @@ class _FullScreenPhotoPageState extends State<FullScreenPhotoPage> {
   }
 
   Widget _getBodyContainer() {
-    bool _isLiked =
-        AppBaseMethods().getInfoAboutLikesFromSP(widget.index) ?? false;
+    bool _isLiked = AppMethods().getInfoAboutLikesFromSP(widget.index) ?? false;
     return Stack(
       children: [
         Stack(
@@ -90,11 +89,11 @@ class _FullScreenPhotoPageState extends State<FullScreenPhotoPage> {
                   elevation: 0,
                   child: _isLiked
                       ? const Icon(
-                          Emotions.like,
+                          CustomIcons.like,
                           size: 25,
                           color: Color.fromRGBO(184, 7, 29, 1),
                         )
-                      : const Icon(Emotions.heart, size: 25),
+                      : const Icon(CustomIcons.heart, size: 25),
                   color: Colors.white.withOpacity(0.5),
                   highlightElevation: 0,
                   minWidth: double.minPositive,
@@ -104,7 +103,7 @@ class _FullScreenPhotoPageState extends State<FullScreenPhotoPage> {
                   ),
                   onPressed: () {
                     setState(() {
-                      AppBaseMethods()
+                      AppMethods()
                           .setInfoAboutLikeInSP(!_isLiked, widget.index);
                     });
                   },

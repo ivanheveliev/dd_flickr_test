@@ -3,11 +3,13 @@ import 'package:dd_flickr_test/views/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await AppBaseMethods().getPreferences();
+  await AppMethods().getPreferences();
+  await AppMethods().getPackageInfo();
   runApp(
     const MyApp(),
   );

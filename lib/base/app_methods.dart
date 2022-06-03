@@ -1,11 +1,17 @@
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AppBaseMethods {
+class AppMethods {
   static SharedPreferences? sharedPreferences;
+  static PackageInfo? packageInfo;
 
   getPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
+  }
+
+  getPackageInfo() async {
+    packageInfo = await PackageInfo.fromPlatform();
   }
 
   launchURL(String link) async {
